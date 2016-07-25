@@ -1,0 +1,28 @@
+<%= form_tag session_path, id: 'login' do %>
+  <%= hidden_field_tag :id_token, nil %>
+  <%= hidden_field_tag :access_token, nil %>
+  <%= hidden_field_tag :state, nil %>
+<% end %>
+
+<script>
+(function () {
+  var getHashParams = function () {
+    var hashParams = {};
+    var e,
+        a = /\+/g,
+        r = /([^&;=]+)=?([^&;]*)/g,
+        d = function (s) { return decodeURIComponent(s.replace(a, " ")); },
+        q = window.location.hash.substring(1);
+    while (e = r.exec(q))
+       hashParams[d(e[1])] = d(e[2]);
+    return hashParams;
+  }
+
+  var params = getHashParams();
+  var form = $('form#login');
+  $('input#id_token', form).val(params.id_token);
+  $('input#access_token', form).val(params.access_token);
+  $('input#state', form).val(params.state);
+  form.submit();
+})();
+</script>
