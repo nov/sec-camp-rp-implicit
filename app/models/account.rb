@@ -20,9 +20,9 @@ class Account < ApplicationRecord
       end
     end
 
-    def authenticate_by_access_token(access_token)
+    def authenticate_by_access_token(access_token, client)
       userinfo = access_token.userinfo!
-      find_or_initialize_by(identifier: userinfo.sub)
+      find_or_initialize_by(identifier: userinfo.raw_attributes[:id])
     end
   end
 end

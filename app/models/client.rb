@@ -1,5 +1,5 @@
 class Client < ApplicationRecord
-  delegate :authorization_uri, to: :connect_client
+  delegate :authorization_uri, :userinfo_uri, to: :connect_client
 
   def tokenize(access_token)
     OpenIDConnect::AccessToken.new(
