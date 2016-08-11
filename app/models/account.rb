@@ -6,9 +6,14 @@ class Account < ApplicationRecord
   end
 
   class << self
-    def authenticate(id_token_str)
-      id_token = JSON::JWT.decode id_token_str, :skip_verification
+    def authenticate_by_id_token(id_token_str, jwks)
+      id_token = JSON::JWT.decode id_token_str, jwks
       find_or_initialize_by(identifier: id_token[:sub])
+    end
+
+    def authenticate_by_access_token(access_token)
+      userinfo = access_token.userinfo!
+      find_or_initialize_by(identifier: userinfo.sub)
     end
   end
 end

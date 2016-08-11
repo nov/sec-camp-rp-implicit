@@ -8,16 +8,24 @@ class Client < ApplicationRecord
     )
   end
 
+  def jwks
+    config.jwks
+  end
+
   private
+
+  def config
+    @config ||= OpenIDConnect::Discovery::Provider::Config.discover! issuer
+  end
 
   def connect_client
     @connect_client ||= OpenIDConnect::Client.new(
       identifier: identifier,
       secret: secret,
       redirect_uri: redirect_uri,
-      authorization_endpoint: authorization_endpoint,
-      token_endpoint: token_endpoint,
-      userinfo_endpoint: userinfo_endpoint
+      authorization_endpoint: config.authorization_endpoint,
+      token_endpoint: config.token_endpoint,
+      userinfo_endpoint: config.userinfo_endpoint
     )
   end
 end

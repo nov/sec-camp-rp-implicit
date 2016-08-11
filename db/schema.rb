@@ -21,14 +21,12 @@ ActiveRecord::Schema.define(version: 20160725070611) do
   end
 
   create_table "clients", force: :cascade do |t|
-    t.string   "identifier",             null: false
-    t.string   "secret",                 null: false
-    t.string   "redirect_uri",           null: false
-    t.string   "authorization_endpoint", null: false
-    t.string   "token_endpoint",         null: false
-    t.string   "userinfo_endpoint",      null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "identifier",   null: false
+    t.string   "secret",       null: false
+    t.string   "redirect_uri", null: false
+    t.string   "issuer",       null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
 end
