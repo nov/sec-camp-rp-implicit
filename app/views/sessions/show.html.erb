@@ -2,6 +2,7 @@
   <%= hidden_field_tag :id_token, nil %>
   <%= hidden_field_tag :access_token, nil %>
   <%= hidden_field_tag :state, nil %>
+  <%= hidden_field_tag :error, nil %>
 <% end %>
 
 <script>
@@ -23,6 +24,7 @@
   $('input#id_token', form).val(params.id_token);
   $('input#access_token', form).val(params.access_token);
   $('input#state', form).val(params.state);
+  $('input#error', form).val(params.error);
   form.submit();
 })();
 </script>

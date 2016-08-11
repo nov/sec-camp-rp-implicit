@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    raise params[:error] if params[:error]
+    raise params[:error] if params[:error].present?
     if session.delete(:state) == params[:state]
       access_token = current_client.tokenize params[:access_token]
       account = if params[:id_token].present?
