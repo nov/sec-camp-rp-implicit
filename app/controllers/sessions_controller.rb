@@ -23,7 +23,7 @@ class SessionsController < ApplicationController
     else
       Account.authenticate_by_access_token access_token
     end
-    account.import! userinfo if account.new_record?
+    account.import! access_token.userinfo! if account.new_record?
     authenticate account
     redirect_to root_url
   end
